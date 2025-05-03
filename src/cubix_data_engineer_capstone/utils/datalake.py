@@ -1,7 +1,7 @@
 from pyspark.sql import DataFrame, SparkSession
 
 
-from src.utils.config import STORAGE_ACCOUNT_NAME
+from cubix_data_engineer_capstone.utils.config import STORAGE_ACCOUNT_NAME
 
 
 def read_file_from_datalake(
@@ -24,7 +24,7 @@ def read_file_from_datalake(
     if format not in ["csv", "json", "delta", "parquet"]:
         raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")
 
-    file_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")
+    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")
 
     spark = SparkSession.getActiveSession()
     if not spark:
@@ -39,7 +39,44 @@ def read_file_from_datalake(
             .read
             .format(format)
             .option("header", "true")
-            .load(file_path, format=format)
+            .load(full_path, format=format)
         )
 
     return df
+
+
+def write_file_to_datalake(
+        df: DataFrame,
+        container_name: str,
+        file_path: str,
+        format: str,
+        mode: str = "overwrite",
+        partition_by: list[str] = None
+) -> None:
+    """Writes a DataFrame to Azure Data Lake as a parquet / csv / delta format.
+
+    Parameters
+    ----------
+    df:             DataFrame to be written.
+    container_name: The name of the file system (container) in Azure Data Lake.
+    file_path:      The path to the file in the data lake.
+    format:         The format of the file ("csv", "json", "delta", "parquet").
+    mode:           Default "overwrite" write mode.
+    partition_by:   List of columns to partition by, default is None.
+
+    """
+
+    if format not in ["csv", "delta", "parquet"]:
+        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")
+
+    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")
+
+    writer = df.write.mode(mode).format(format)
+
+    if format == "csv":
+        writer = writer.option("header", True)
+
+    if partition_by:
+        writer = writer.partitionBy(*partition_by)
+
+    writer.save(full_path)
