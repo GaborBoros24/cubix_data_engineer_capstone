@@ -10,16 +10,15 @@ def bronze_ingest(
         mode: str,
         partition_by: list[str]
 ):
-    """_summary_
+    """Extract files from the source, and load them to the desired container.
 
-    :param source_path: _description_
-    :param bronze_path: _description_
-    :param file_name: _description_
-    :param container_name: _description_
-    :param format: _description_
-    :param mode: _description_
-    :param partition_by: _description_
-    :return: _description_
+    :param source_path: Path to source file.
+    :param bronze_path: Path to the bronze layer.
+    :param file_name: Name of the file to ingest.
+    :param container_name: Name of the container holding the files.
+    :param format: The format of the input file. 
+    :param mode: Mode: "append", "overwrite", "ignore".
+    :param partition_by: Column(s) to partition on. "None" by default.
     """
 
     df = read_file_from_datalake(container_name, f"{source_path}/{file_name}", format)  # noqa: E501
