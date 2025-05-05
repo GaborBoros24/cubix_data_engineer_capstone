@@ -22,9 +22,9 @@ def read_file_from_datalake(
         DataFrame with a loaded data.
     """
     if format not in ["csv", "json", "delta", "parquet"]:
-        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")
+        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
 
-    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")
+    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")  # noqa: E501
 
     spark = SparkSession.getActiveSession()
     if not spark:
@@ -67,9 +67,9 @@ def write_file_to_datalake(
     """
 
     if format not in ["csv", "delta", "parquet"]:
-        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")
+        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
 
-    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")
+    full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")  # noqa: E501
 
     writer = df.write.mode(mode).format(format)
 
@@ -79,4 +79,5 @@ def write_file_to_datalake(
     if partition_by:
         writer = writer.partitionBy(*partition_by)
 
-    writer.save(full_path)
+    writer.save(full_path)  
+
