@@ -79,5 +79,4 @@ def write_file_to_datalake(
     if partition_by:
         writer = writer.partitionBy(*partition_by)
 
-    writer.save(full_path)  
-
+    writer.save(full_path)
