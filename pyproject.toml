@@ -23,6 +23,7 @@ pre-commit = "^4.2.0"
 pandas = "^2.2.3"
 
 [tool.pytest.ini_options]
+python_paths = ["src"]
 testpaths = [".\tests"]
 filterwarnings = ["ignore:DeprecationWarning"]
 addopts = "--disable-warnings -p no:warnings"
