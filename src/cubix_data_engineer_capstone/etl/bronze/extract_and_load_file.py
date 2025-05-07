@@ -16,7 +16,7 @@ def bronze_ingest(
     :param bronze_path: Path to the bronze layer.
     :param file_name: Name of the file to ingest.
     :param container_name: Name of the container holding the files.
-    :param format: The format of the input file. 
+    :param format: The format of the input file.
     :param mode: Mode: "append", "overwrite", "ignore".
     :param partition_by: Column(s) to partition on. "None" by default.
     """
