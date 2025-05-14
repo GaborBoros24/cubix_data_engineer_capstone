@@ -4,9 +4,10 @@ from pyspark.sql import DataFrame, SparkSession
 
 from cubix_data_engineer_capstone.utils.config import STORAGE_ACCOUNT_NAME
 
-def scd1(spark: SparkSession, container_name: str, file_path: str, new_data: DataFrame, primary_key: str):
 
-    master_path = f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}"
+def scd1(spark: SparkSession, container_name: str, file_path: str, new_data: DataFrame, primary_key: str):  # noqa: E501
+
+    master_path = f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}"  # noqa: E501
     delta_master = DeltaTable.forPath(spark, master_path)
 
     (
