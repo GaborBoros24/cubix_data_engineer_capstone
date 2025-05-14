@@ -48,4 +48,4 @@ jobs:
 
       - name: Build and Deploy to Databricks
         run: |
-          pwsh -File .\cubix_data_engineer_capstone\upload_latest_whl.ps1
+          pwsh -File .\src\cubix_data_engineer_capstone\upload_latest_whl.ps1
