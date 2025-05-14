@@ -74,7 +74,7 @@ def test_get_products(spark):
                 "nameofmodel_1",
                 500,
                 "desc_1",
-                Decimal("2.0")
+                Decimal("4.0")
             )
         ],
 
