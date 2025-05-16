@@ -6,8 +6,8 @@ def bronze_ingest(
         bronze_path: str,
         file_name: str,
         container_name: str,
-        format: str,
-        mode: str,
+        # format: str,
+        # mode: str,
         partition_by: list[str]
 ):
     """Extract files from the source, and load them to the desired container.
@@ -27,7 +27,7 @@ def bronze_ingest(
         df=df,
         container_name=container_name,
         file_path=f"{bronze_path}/{file_name}",
-        format=format,
-        mode=mode,
+        # format=format,
+        # mode=mode,
         partition_by=partition_by
     )

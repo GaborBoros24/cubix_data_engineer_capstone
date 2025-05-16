@@ -13,3 +13,11 @@ SPARK = (
 @fixture
 def spark():
     return SPARK.getActiveSession()
+
+
+@fixture
+def some_df():
+    return SPARK.createDataFrame(
+        [("some_data",)],
+        schema=["some_column"]
+    )
