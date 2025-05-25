@@ -6,8 +6,8 @@ def bronze_ingest(
         bronze_path: str,
         file_name: str,
         container_name: str,
-        # format: str,
-        # mode: str,
+    #   format: str,
+    #   mode: str,
         partition_by: list[str]
 ):
     """Extract files from the source, and load them to the desired container.
@@ -21,13 +21,13 @@ def bronze_ingest(
     :param partition_by: Column(s) to partition on. "None" by default.
     """
 
-    df = read_file_from_datalake(container_name, f"{source_path}/{file_name}", format)  # noqa: E501
+    df = read_file_from_datalake(container_name, f"{source_path}/{file_name}", "csv")  # noqa: E501
 
     return write_file_to_datalake(
         df=df,
         container_name=container_name,
         file_path=f"{bronze_path}/{file_name}",
-        # format=format,
-        # mode=mode,
+        format="csv",
+        mode="overwrite",
         partition_by=partition_by
     )

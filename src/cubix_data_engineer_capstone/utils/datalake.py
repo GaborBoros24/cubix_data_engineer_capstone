@@ -21,8 +21,8 @@ def read_file_from_datalake(
     DataFrame
         DataFrame with a loaded data.
     """
-    if format not in ["csv", "json", "delta", "parquet"]:
-        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
+    # if format not in ["csv", "json", "delta", "parquet"]:
+    #    raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
 
     full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")  # noqa: E501
 
@@ -30,9 +30,9 @@ def read_file_from_datalake(
     if not spark:
         raise RuntimeError("No active SparkSession found.")
 
-    if format == "json":
-        df = spark.read.json(file_path)
-        return df
+    # if format == "json":
+    #    df = spark.read.json(file_path)
+    #    return df
     else:
         df = (
             spark
@@ -66,8 +66,8 @@ def write_file_to_datalake(
 
     """
 
-    if format not in ["csv", "delta", "parquet"]:
-        raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
+    # if format not in ["csv", "delta", "parquet"]:
+    #    raise ValueError(f"Invalid format: {format}. Supported formats are: csv, json, delta, parquet.")  # noqa: E501
 
     full_path = (f"abfss://{container_name}@{STORAGE_ACCOUNT_NAME}.dfs.core.windows.net/{file_path}")  # noqa: E501
 
