@@ -22,6 +22,7 @@ pytest = "^8.3.5"
 pyarrow = "^19.0.1"
 pre-commit = "^4.2.0"
 pandas = "^2.2.3"
+ipykernel = "^6.29.5"
 
 [tool.pytest.ini_options]
 python_paths = ["src"]
